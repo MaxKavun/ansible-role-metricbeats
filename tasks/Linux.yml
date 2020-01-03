@@ -16,3 +16,4 @@
     mode: 0644
   notify: Restart filebeat
   when: metricbeat_config is defined
+  become: true
