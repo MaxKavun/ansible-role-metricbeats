@@ -57,16 +57,10 @@ GPG-key from elasticsearch repository. Default value is `https://packages.elasti
 
 ## Output customization:
 
-- `elasticsearch.host`
-Array of hosts to connect to. Default value is `localhost`
-- `elasticsearch.port`
-Value for setting custom port. Default value is `9200`
-
-
-- `logstash.host`
-Array of hosts to connect to. Default value is `localhost`
-- `logstash.port`
-Value for setting custom port. Default value is `5044`
+- `metricbeat_config`
+Custom config for metricbeat
+- `metricbeat_modules`
+Specify which modules will be enabled. By default only system module enabled
 
 
 ## Advanced config parameters:
@@ -110,7 +104,12 @@ Example Playbook
         "reload.enabled": false
         },
        "output.elasticsearch": {
-         "hosts": ["localhost:9200"]
+         "hosts": ["localhost:9200"],
+         "#username": "elastic",
+         "#password": "changeme"
+       },
+       "#output.logstash": {
+         "#hosts": ["localhost:5044"]
        }
       }
 ```

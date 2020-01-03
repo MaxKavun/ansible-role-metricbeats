@@ -17,3 +17,7 @@
   notify: Restart filebeat
   when: metricbeat_config is defined
   become: true
+
+- name: Enable modules for metricbeat
+  command: 'metricbeat modules enable {{ item }}'
+  with_items: '{{ metricbeat_modules }}'
