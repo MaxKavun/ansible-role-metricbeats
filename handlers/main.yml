@@ -1,0 +1,6 @@
+---
+- name: Restart filebeat
+  service:
+    name: '{{ metricbeat_service_name }}'
+    state: restarted
+  become: true

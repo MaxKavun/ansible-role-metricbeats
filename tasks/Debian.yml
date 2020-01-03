@@ -2,7 +2,7 @@
 - block:
     - name: Download and install the Public Signing Key
       apt_key:
-        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        url: '{{ elastic_gpg_key }}'
         state: present
 
     - name: Install dependencies for Debian
@@ -14,7 +14,7 @@
 
     - name: Add Beats repository
       apt_repository:
-        repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+        repo: '{{ es_apt_url }}'
         state: present
         update_cache: true
 
@@ -25,7 +25,7 @@
 
     - name: Run & enable metricbeat service
       systemd:
-        name: metricbeat
+        name: '{{ metricbeat_service_name }}'
         enabled: yes
         state: started
   become: true
