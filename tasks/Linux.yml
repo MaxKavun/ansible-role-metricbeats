@@ -6,3 +6,13 @@
     - not-supported.yml
   loop_control:
     loop_var: distrib_tasks
+
+- name: Place config file metricbeat
+  template:
+    src: 'metricbeat.yml.j2'
+    dest: '{{ path.config }}/metricbeat.yml'
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart filebeat
+  when: metricbeat_config is defined

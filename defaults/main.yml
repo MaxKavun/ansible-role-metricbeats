@@ -4,3 +4,5 @@ elastic_gpg_key_redhat: https://packages.elastic.co/GPG-KEY-elasticsearch
 es_apt_url: 'deb https://artifacts.elastic.co/packages/7.x/apt stable main'
 
 metricbeat_service_name: metricbeat
+path:
+  config: '/etc/metricbeat'
