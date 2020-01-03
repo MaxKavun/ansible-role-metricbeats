@@ -6,3 +6,11 @@
     - default.yml
   loop_control:
     loop_var: platform_vars
+
+- name: Configure and install packages for current OS
+  include_tasks: '{{ platform_tasks }}'
+  with_first_found:
+    - '{{ ansible_system }}.yml'
+    - not-supported.yml
+  loop_control:
+    loop_var: platform_tasks
