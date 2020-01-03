@@ -1,0 +1,4 @@
+- name: Installing filebeat on current OS
+  with_first_found:
+    - '{{ ansible_os_family }}.yml'
+    - not-supported.yml
