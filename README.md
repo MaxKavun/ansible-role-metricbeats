@@ -23,9 +23,9 @@ Role tasks
 
 
 - Prepare server (add elastic repo)
-- [Optional] Create folder(s) for custom paths
 - Install metricbeat
-- Copy configuration file
+- [Optional] Copy configuration file
+- [Optional] Enable modules
 
 
 Requirements
@@ -53,10 +53,6 @@ You can override any variable below by setting "variable: value" in playbook.
 GPG-key from elasticsearch repository. Default value is `https://artifacts.elastic.co/GPG-KEY-elasticsearch`
 - `elastic_gpg_key_redhat`
 GPG-key from elasticsearch repository. Default value is `https://packages.elastic.co/GPG-KEY-elasticsearch`
-
-
-## Output customization:
-
 - `metricbeat_config`
 Custom config for metricbeat
 - `metricbeat_modules`
