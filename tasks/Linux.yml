@@ -1,4 +1,8 @@
+---
 - name: Installing filebeat on current OS
+  include_tasks: '{{ distrib_tasks }}'
   with_first_found:
     - '{{ ansible_os_family }}.yml'
     - not-supported.yml
+  loop_control:
+    loop_var: distrib_tasks
