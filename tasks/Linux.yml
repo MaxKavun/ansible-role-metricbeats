@@ -7,17 +7,18 @@
   loop_control:
     loop_var: distrib_tasks
 
-- name: Place config file metricbeat
-  template:
-    src: 'metricbeat.yml.j2'
-    dest: '{{ path.config }}/metricbeat.yml'
-    owner: root
-    group: root
-    mode: 0644
-  notify: Restart filebeat
-  when: metricbeat_config is defined
-  become: true
+- block:
+    - name: Place config file metricbeat
+      template:
+        src: 'metricbeat.yml.j2'
+        dest: '{{ path.config }}/metricbeat.yml'
+        owner: root
+        group: root
+        mode: 0644
+      notify: Restart filebeat
+      when: metricbeat_config is defined
 
-- name: Enable modules for metricbeat
-  command: 'metricbeat modules enable {{ item }}'
-  with_items: '{{ metricbeat_modules }}'
+    - name: Enable modules for metricbeat
+      command: 'metricbeat modules enable {{ item }}'
+      with_items: '{{ metricbeat_modules }}'
+  become: true

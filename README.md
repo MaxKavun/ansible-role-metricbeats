@@ -35,7 +35,7 @@ Requirements
 - Minimal Version of the ansible for installation: 2.9
  - **Supported OS**:
    - CentOS
-     - 7
+     - 7,8
    - Ubuntu
      - 16.04, 18.04
    - Debian
@@ -89,6 +89,21 @@ Example Playbook
   roles:
     - role: ansible-role-metricbeat
 ```
+
+### Installing Metricbeat 7.x version with enabled system and jolokia modules:
+
+
+```yaml
+- name: Install metricbeat
+  hosts: all
+  roles:
+    - role: ansible-role-metricbeat
+  vars:
+    metricbeat_modules:
+      - system
+      - jolokia
+```
+
 ### Installing Metricbeat 7.x version with custom config:
 
 
