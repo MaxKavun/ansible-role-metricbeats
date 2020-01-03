@@ -1,23 +1,25 @@
 ---
-- name: Download and install the Public Signing Key
-  apt_key:
-    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-    state: present
+- block:
+    - name: Download and install the Public Signing Key
+      apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
 
-- name: Install dependencies for Debian
-  apt:
-    name: apt-transport-https
-    state: present
-  register: debian_dependency
-  until: debian_dependency is succeeded
+    - name: Install dependencies for Debian
+      apt:
+        name: apt-transport-https
+        state: present
+      register: debian_dependency
+      until: debian_dependency is succeeded
 
-- name: Add Beats repository
-  apt_repository:
-    repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
-    state: present
-    update_cache: true
+    - name: Add Beats repository
+      apt_repository:
+        repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+        state: present
+        update_cache: true
 
-- name: Install metricbeat
-  apt:
-    name: metricbeat
-    state: present
+    - name: Install metricbeat
+      apt:
+        name: metricbeat
+        state: present
+  become: true
