@@ -95,7 +95,7 @@ Example Playbook
   roles:
     - role: ansible-role-metricbeat
 ```
-### Installing Metricbeat 7.x version with custom path to log files and elasticsearch output:
+### Installing Metricbeat 7.x version with custom config:
 
 
 ```yaml
@@ -104,9 +104,15 @@ Example Playbook
   roles:
     - role: ansible-role-metricbeat
   vars:
-    elasticsearch:
-      host: elasticsearch.example.com
-      port: 9200
+    metricbeat_config: {
+      "metricbeat.config.modules": {
+        "path": '${path.config}/modules.d/*.yml',
+        "reload.enabled": false
+        },
+       "output.elasticsearch": {
+         "hosts": ["localhost:9200"]
+       }
+      }
 ```
 
 
