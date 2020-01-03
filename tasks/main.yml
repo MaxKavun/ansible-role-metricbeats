@@ -22,4 +22,10 @@
       apt:
         name: metricbeat
         state: present
+
+    - name: Run & enable metricbeat service
+      systemd:
+        name: metricbeat
+        enabled: yes
+        state: started
   become: true
