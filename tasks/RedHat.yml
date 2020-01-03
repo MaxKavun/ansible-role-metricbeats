@@ -1,0 +1,28 @@
+---
+- block:
+    - name: Download and install the Public Signing Key
+      rpm_key:
+        url: https://packages.elastic.co/GPG-KEY-elasticsearch
+        state: present
+
+    - name: Add Beats repository
+      yum_repository:
+        name: metricbeat
+        baseurl: https://artifacts.elastic.co/packages/7.x/yum
+        gpgcheck: yes
+        gpgkey: https://packages.elastic.co/GPG-KEY-elasticsearch
+        enabled: yes
+        state: present
+
+    - name: Install metricbeat
+      yum:
+        name: metricbeat
+        state: present
+        update_cache: true
+
+    - name: Run & enable metricbeat service
+      systemd:
+        name: metricbeat
+        enabled: yes
+        state: started
+  become: true
