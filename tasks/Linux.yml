@@ -25,13 +25,13 @@
     - name: Place custom config of module
       template:
         src: 'module.yml.j2'
-        dest: '{{ path.config }}/modules.d/{{ module_name }}'
+        dest: '{{ path.config }}/modules.d/{{ module_config[0].module }}.yml'
         owner: root
         group: root
         mode: 0644
       notify: Restart filebeat
       when: 
         - module_config is defined
-        - module_config.module_name in metricbeat_modules
+        - module_config[0].module in metricbeat_modules
 
   become: true
