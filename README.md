@@ -124,6 +124,34 @@ Example Playbook
        }
       }
 ```
+### Installing Metricbeat 7.x version with custom jolokia module:
+
+
+```yaml
+- name: Install metricbeat
+  hosts: all
+  roles:
+    - role: ansible-role-metricbeat
+  vars:
+    metricbeat_modules:
+      - system
+      - jolokia
+    module_config:
+      - module: jolokia
+        metricsets: ["jmx"]
+        period: 10s
+        hosts: ["localhost:9999"]
+        namespace: "metrics"
+        path: "/jolokia/?ignoreErrors=true&canonicalNaming=false"
+        http_method: "POST"
+        jmx.mappings:
+        - mbean: 'java.lang:type=Memory'
+          attributes:
+            - attr: HeapMemoryUsage
+              field: memory.heap_usage
+            - attr: NonHeapMemoryUsage
+              field: memory.non_heap_usage
+```
 
 
 License
